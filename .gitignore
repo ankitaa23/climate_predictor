@@ -15,8 +15,6 @@ ENV/
 .vscode/
 .idea/
 
-# macOS
-.DS_Store
 
 # Python package distribution
 *.egg-info/

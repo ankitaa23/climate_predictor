@@ -37,9 +37,9 @@ matplotlib.use('TkAgg')  # or 'Qt5Agg', depending on your system
 MODEL_FILENAME = "climate_model.joblib"
 ENCODER_FILENAME = "label_encoder.joblib"
 
-# ----------------------------
+
 # Synthetic data generator
-# ----------------------------
+
 def generate_synthetic_data(num_countries=8, years=5, seed=42):
     """
     Generate a synthetic historical climate dataset.
@@ -110,9 +110,9 @@ def generate_synthetic_data(num_countries=8, years=5, seed=42):
     df = pd.DataFrame.from_records(records)
     return df
 
-# ----------------------------
+
 # Data loading & preprocessing
-# ----------------------------
+
 def load_data(path=None, use_synthetic=False):
     if use_synthetic:
         print("Generating synthetic data (for demo)...")
@@ -159,9 +159,9 @@ def prepare_features(df, label_encoder=None, fit_encoder=False):
     else:
         raise ValueError("Label encoder handling: pass encoder or set fit_encoder=True")
 
-# ----------------------------
+
 # Model training & saving
-# ----------------------------
+
 def train_and_save(df, target_col="Temperature", model_filename=MODEL_FILENAME, encoder_filename=ENCODER_FILENAME):
     print("Preparing features...")
     df_feat, le = prepare_features(df, fit_encoder=True)
@@ -184,9 +184,9 @@ def train_and_save(df, target_col="Temperature", model_filename=MODEL_FILENAME, 
     # return test split for plotting if needed
     return model, le, (X_test, y_test, y_pred, features)
 
-# ----------------------------
+
 # Real-time fetch
-# ----------------------------
+
 def get_weather_real_time(country_name, api_key):
     """
     Get current weather from OpenWeatherMap by city/country string.
@@ -221,9 +221,9 @@ def get_weather_real_time(country_name, api_key):
     # if failed:
     return None
 
-# ----------------------------
+
 # Prediction wrapper
-# ----------------------------
+
 def predict_for_country(country_name, api_key, model=None, le=None):
     # load model/encoder if not provided
     if model is None or le is None:
@@ -253,9 +253,9 @@ def predict_for_country(country_name, api_key, model=None, le=None):
         "current_pressure": real.get("pressure")
     }
 
-# ----------------------------
+
 # Plotting
-# ----------------------------
+
 def plot_actual_vs_pred(y_test, y_pred):
     plt.figure(figsize=(7,7))
     plt.scatter(y_test, y_pred, alpha=0.5)
@@ -267,9 +267,9 @@ def plot_actual_vs_pred(y_test, y_pred):
     plt.show(block=True)
 
 
-# ----------------------------
+
 # CLI main
-# ----------------------------
+
 def main():
     parser = argparse.ArgumentParser(description="Climate prediction demo: train or predict (real-time).")
     parser.add_argument("--mode", choices=["train", "predict", "both"], default="both",
